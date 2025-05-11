@@ -1,5 +1,16 @@
 import os
 
+stop_words = [
+    'de', 'la', 'que', 'el', 'en', 'y', 'a', 'los', 'del', 'se',
+    'las', 'por', 'un', 'para', 'con', 'no', 'una', 'su', 'al',
+    'lo', 'como', 'mas', 'pero', 'sus', 'le', 'ya', 'o',
+    'porque', 'muy', 'sin', 'también', 'hasta',
+    'donde', 'todo', 'nos', 'uno', 'ni', 'yo', 'tú', 'él',
+    'ella', 'nosotros', 'ellos', 'ellas', 'mi', 'tu', 'te',
+    'me', 'si', 'nos', 'ese', 'esa', 'esto', 'eso', 'es', 'son', 'he', 'has', 'han', 'había'
+]
+caracteres = [',', '.', '!', '?', '¿', '¡', ':', ';', '-', '_', '(', ')', '[', ']', '{', '}', "'", '"']
+
 def leerDocumentos(carpeta):
     contenido_total = ""
     for nombre_archivo in os.listdir(carpeta):
@@ -47,18 +58,7 @@ def palabras_mas_frecuentes(diccionario, n):
     palabras_ordenadas = sorted(diccionario.items(), key=lambda palabra_total: palabra_total[1], reverse=True)
     return palabras_ordenadas[:n]
 
-carpeta = "./ArchivosTarea"  
-texto_normalizado = []
-stop_words = [
-    'de', 'la', 'que', 'el', 'en', 'y', 'a', 'los', 'del', 'se',
-    'las', 'por', 'un', 'para', 'con', 'no', 'una', 'su', 'al',
-    'lo', 'como', 'mas', 'pero', 'sus', 'le', 'ya', 'o',
-    'porque', 'muy', 'sin', 'también', 'hasta',
-    'donde', 'todo', 'nos', 'uno', 'ni', 'yo', 'tú', 'él',
-    'ella', 'nosotros', 'ellos', 'ellas', 'mi', 'tu', 'te',
-    'me', 'si', 'nos', 'ese', 'esa', 'esto', 'eso', 'es', 'son', 'he', 'has', 'han', 'había'
-]
-caracteres = [',', '.', '!', '?', '¿', '¡', ':', ';', '-', '_', '(', ')', '[', ']', '{', '}', "'", '"']
+carpeta = "./ArchivosTarea"
 
 texto = leerDocumentos(carpeta)
 texto_normalizado = normalizar_texto(texto)
