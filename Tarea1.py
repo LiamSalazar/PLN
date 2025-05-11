@@ -7,7 +7,8 @@ stop_words = [
     'porque', 'muy', 'sin', 'también', 'hasta',
     'donde', 'todo', 'nos', 'uno', 'ni', 'yo', 'tú', 'él',
     'ella', 'nosotros', 'ellos', 'ellas', 'mi', 'tu', 'te',
-    'me', 'si', 'nos', 'ese', 'esa', 'esto', 'eso', 'es', 'son', 'he', 'has', 'han', 'había'
+    'me', 'si', 'nos', 'ese', 'esa', 'esto', 'eso', 'es', 'son', 'he', 'has', 'han', 'había',
+    'este', 'esta', 'estos', 'estas'
 ]
 caracteres = [',', '.', '!', '?', '¿', '¡', ':', ';', '-', '_', '(', ')', '[', ']', '{', '}', "'", '"']
 
@@ -59,12 +60,10 @@ def palabras_mas_frecuentes(diccionario, n):
     return palabras_ordenadas[:n]
 
 carpeta = "./ArchivosTarea"
-
 texto = leerDocumentos(carpeta)
 texto_normalizado = normalizar_texto(texto)
 print("Palabras más frecuentes:")
 diccionario = crearDiccionario(texto_normalizado)
-palabras_frecuentes = palabras_mas_frecuentes(diccionario, 50)
-
+palabras_frecuentes = palabras_mas_frecuentes(diccionario, 10)
 for palabra, frecuencia in palabras_frecuentes:
     print(f"{palabra}: {frecuencia}")
