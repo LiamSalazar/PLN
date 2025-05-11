@@ -27,7 +27,7 @@ def eliminar_stopwords(texto):
 
 def eliminar_caracteres_especiales(texto):
     for caracter in caracteres:
-        texto = texto.replace(caracter, '')
+        texto = texto.replace(caracter, ' ')
     return texto
 
 def eliminar_acentos(texto):
