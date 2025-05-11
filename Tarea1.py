@@ -44,7 +44,7 @@ def crearDiccionario(texto_normalizado):
     return diccionario
 
 def palabras_mas_frecuentes(diccionario, n):
-    palabras_ordenadas = sorted(diccionario.items(), key=lambda x: x[1], reverse=True)
+    palabras_ordenadas = sorted(diccionario.items(), key=lambda palabra_total: palabra_total[1], reverse=True)
     return palabras_ordenadas[:n]
 
 carpeta = "./ArchivosTarea"  
@@ -64,6 +64,7 @@ texto = leerDocumentos(carpeta)
 texto_normalizado = normalizar_texto(texto)
 print("Palabras más frecuentes:")
 diccionario = crearDiccionario(texto_normalizado)
-palabras_frecuentes = palabras_mas_frecuentes(diccionario, 5)
+palabras_frecuentes = palabras_mas_frecuentes(diccionario, 50)
+
 for palabra, frecuencia in palabras_frecuentes:
     print(f"{palabra}: {frecuencia}")
