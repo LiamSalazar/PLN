@@ -67,3 +67,5 @@ diccionario = crearDiccionario(texto_normalizado)
 palabras_frecuentes = palabras_mas_frecuentes(diccionario, 10)
 for palabra, frecuencia in palabras_frecuentes:
     print(f"{palabra}: {frecuencia}")
+
+# dataframes de python (pandas)
