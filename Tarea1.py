@@ -39,6 +39,20 @@ def eliminar_acentos(texto):
         texto = texto.replace(acento, sin_acento)
     return texto
 
+def tokenize(s):
+    tokens = []
+    word = ''
+    for char in s:
+        if char != ' ':
+            word += char
+        else:
+            if word:
+                tokens.append(word)
+                word = ''
+    if word:
+        tokens.append(word)
+    return tokens
+
 def normalizar_texto(texto):
     texto = texto.lower()  
     texto = eliminar_caracteres_especiales(texto) 
@@ -58,6 +72,8 @@ def crearDiccionario(texto_normalizado):
 def palabras_mas_frecuentes(diccionario, n):
     palabras_ordenadas = sorted(diccionario.items(), key=lambda palabra_total: palabra_total[1], reverse=True)
     return palabras_ordenadas[:n]
+
+
 
 carpeta = "./ArchivosTarea"
 texto = leerDocumentos(carpeta)
