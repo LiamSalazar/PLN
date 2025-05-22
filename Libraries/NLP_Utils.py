@@ -1,4 +1,7 @@
+import math
 import os
+
+import numpy as np
 
 class TukeyNLP:
     def __init__(self):
@@ -78,22 +81,29 @@ class TukeyNLP:
                 vector[idx] += 1
         return vector
 
-nlp = TukeyNLP()
-# Pruebas
-docs = ["Hola me llamo Liam", "El perro come pescado", "El gato come pescado"]
-print("\nPrueba 1:")
-print("\nDocumentos tokenizados:")
-docs_tokenizados = nlp.normalizar_documentos(docs)
-print(docs_tokenizados)
-print("\nVocabulario:")
-vocabulario = nlp.get_vocabulary(docs_tokenizados)
-print(vocabulario)
-print("\nBag of words:")
-bow = []
-for doc in docs_tokenizados:
-    aux = nlp.bag_of_words(vocabulario, doc)
-    bow.append(aux)
-
-for i in range(len(bow)):
-    print("DOC ",i, "\t", bow[i])
+    def get_bow(self, lista_documentos):
+        vocabulario = self.get_vocabulary(lista_documentos)
+        bow = []
+        for doc in lista_documentos:
+            aux = self.bag_of_words(vocabulario, doc)
+            bow.append(aux)
+        return vocabulario, bow
     
+    def tf_idf(self, tokens, vocab):
+        no_docs = len(tokens)
+        # IDF
+        idf = dict()
+        for word in vocab:
+            n_t = sum(1 for document in tokens if word in document)
+            idf[word] = math.log(no_docs/(1+n_t))
+        # TF-IDF
+        tf_idf_matrix = []
+        for doc in tokens:
+            doc_len = len(doc)
+            tf_idf_vector = []
+            for word in vocab:
+                tf = doc.count(word) / doc_len
+                tf_idf_val = tf * idf[word]
+                tf_idf_vector.append(tf_idf_val) 
+            tf_idf_matrix.append(tf_idf_vector)
+        return np.array(tf_idf_matrix)
