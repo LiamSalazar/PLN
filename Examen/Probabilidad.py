@@ -10,7 +10,7 @@ class Bayes:
             # Probabilidad P(Evento)
             p_evt = (event == evt).sum() / total
 
-            # Subconjunto donde se cumple el evento (la clase)
+            # Subconjunto donde se cumple el evento 
             condition_subset = conditions[event == evt]
             p_conditions_given_evt = 1
 
@@ -37,7 +37,8 @@ class Bayes:
         for r in result:
             r["Probabilidad"] = r["Probabilidad"] / total_prob if total_prob > 0 else 0
 
-        return pd.DataFrame(result)
+        resultDF = pd.DataFrame(result).sort_values('Probabilidad', ascending=False)
+        return resultDF.iloc[0,0], resultDF
 
 df = pd.DataFrame({
     'Clase': ['Sol', 'Lluvia', 'Sol', 'Nieve', 'Sol', 'Lluvia'],
@@ -46,5 +47,6 @@ df = pd.DataFrame({
 })
 
 bayes = Bayes()
-res = bayes.naive_bayes(df['Clase'], df[['Cielo', 'Viento']], ['Nublado', 'Sí'])
-print(res)
+maximo, res = bayes.naive_bayes(df['Clase'], df[['Cielo', 'Viento']], ['Nublado', 'Sí'])
+print(f'\nDataFrame de resultado de probabilidades:\n {res}')
+print(f'\nClima más probable: {maximo}\n')
